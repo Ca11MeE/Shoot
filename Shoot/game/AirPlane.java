@@ -5,6 +5,9 @@ import java.awt.Graphics;
 
 public class AirPlane extends FlyingObject implements Enemy{
 	
+	//速度
+	private int speed=3;
+	
 	//无参构造(设定默认值)
 	public AirPlane() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +25,10 @@ public class AirPlane extends FlyingObject implements Enemy{
 	//坐标和大小构造
 	public AirPlane(int x,int y,int width,int height){
 		setX(x);setY(y);setWidth(width);setHeight(height);
+	}
+	
+	public void step(){
+		y+=speed;
 	}
 	
 	@Override

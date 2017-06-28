@@ -5,6 +5,9 @@ import java.awt.Graphics;
 
 public class AwdPkg extends FlyingObject implements Award{
 	
+	//速度
+	private int speed=3;
+	
 	public AwdPkg() {
 		// TODO Auto-generated constructor stub
 		this.x=0;
@@ -24,6 +27,10 @@ public class AwdPkg extends FlyingObject implements Award{
 		setHeight(height);
 	}
 	
+	public void step(){
+		y+=speed;
+	}
+	
 	@Override
 	public int getAward() {
 		// TODO Auto-generated method stub
@@ -34,7 +41,7 @@ public class AwdPkg extends FlyingObject implements Award{
 	void paintObj(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(Color.PINK);
-		g.fill3DRect(this.x, this.dy, this.width, this.height,true);
+		g.fill3DRect(this.x, this.y, this.width, this.height,true);
 		g.setColor(Color.black);
 		g.drawLine(this.x+this.width/2, this.y, this.x+this.width/2, this.y+this.height);
 		g.drawLine(this.x, this.y+this.height/2, this.x+this.width, this.y+this.height/2);
