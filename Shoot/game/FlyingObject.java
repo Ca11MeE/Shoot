@@ -12,6 +12,7 @@ abstract class FlyingObject {
 	protected int y;
 	protected int width;
 	protected int height;
+	protected int life;
 	
 	
 	/**
@@ -53,4 +54,13 @@ abstract class FlyingObject {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
+	//飞行物走一步
+	abstract void step();
+	//飞行物越界判断
+	abstract boolean outOfBound();
+	//飞行物碰撞
+	abstract boolean hit(FlyingObject flyingObject);
+	//获取生命
+	abstract int getLife();
 }

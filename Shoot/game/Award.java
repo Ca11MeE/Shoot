@@ -10,7 +10,8 @@ public interface Award {
 	 * 奖励双重火力
 	 */
 	public static final int DOUBLE_FIRE=1;
-	
+	//定义奖励数目
+	public static final int AWARD_NUM=2;
 	/**
 	 * 实现返回奖励类型所表示的int值
 	 * @return 奖励表示的int值

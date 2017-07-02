@@ -6,7 +6,8 @@ import java.awt.Graphics;
 public class AwdPkg extends FlyingObject implements Award{
 	
 	//速度
-	private int speed=3;
+	private int speed=1;
+	private int awdType;
 	
 	public AwdPkg() {
 		// TODO Auto-generated constructor stub
@@ -14,6 +15,8 @@ public class AwdPkg extends FlyingObject implements Award{
 		this.y=0;
 		this.width=20;
 		this.height=20;
+		this.life=1;
+		this.awdType=(int)(Math.random()*AWARD_NUM);
 	}
 	
 	public AwdPkg(int x,int y){
@@ -34,7 +37,7 @@ public class AwdPkg extends FlyingObject implements Award{
 	@Override
 	public int getAward() {
 		// TODO Auto-generated method stub
-		return 0;
+		return awdType;
 	}
 
 	@Override
@@ -47,4 +50,33 @@ public class AwdPkg extends FlyingObject implements Award{
 		g.drawLine(this.x, this.y+this.height/2, this.x+this.width, this.y+this.height/2);
 	}
 
+	@Override
+	boolean outOfBound() {
+		// TODO Auto-generated method stub
+		if (this.y>=Game.FRAME_HEIGHT) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	boolean hit(FlyingObject flyingObject) {
+		// TODO Auto-generated method stub
+				boolean b=flyingObject.getX()>=this.x-flyingObject.getWidth() && flyingObject.getY()>=this.y-flyingObject.getHeight()
+						&&flyingObject.getX()<=this.x+this.width
+						&&flyingObject.getY()<=this.y+this.height;
+				if (b) {
+					life--;
+					if (life<=0) {
+						return true;
+					}
+				}
+				return false;
+	}
+
+	@Override
+	int getLife() {
+		// TODO Auto-generated method stub
+		return life;
+	}
 }

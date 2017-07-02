@@ -14,6 +14,8 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 public class Hero extends FlyingObject{
 	
 	private int speed=5;
+	private int life=3;
+	private int fireValue=0;
 	public static final int UP=0;
 	public static final int DOWN=1;
 	public static final int LEFT=2;
@@ -23,6 +25,12 @@ public class Hero extends FlyingObject{
 	public Hero() {
 		// TODO Auto-generated constructor stub
 		setX(200);setY(300);setWidth(50);setHeight(50);
+	}
+	
+	public Hero(int x,int y){
+		this();
+		setX(x);
+		setY(y);
 	}
 	
 	//设置速度
@@ -48,6 +56,38 @@ public class Hero extends FlyingObject{
 		}
 	}
 	
+	//增加生命
+	public void  addLife() {
+		life++;
+
+	}
+	
+	//减少生命
+	public void subLife(){
+		life--;
+	}
+	
+	//获取生命
+	public int getLife(){
+		return life;
+	}
+	
+	//获取火力值
+	public void addFire(){
+		fireValue+=40;
+	}
+	
+	//英雄机射击
+	//setX(hero.getX()+hero.getWidth()/2);setY(hero.getY());
+	public Bullet[] shoot(){
+		if (fireValue>0) {
+			fireValue-=5;
+			return new Bullet[]{new Bullet(this.getX()+this.getWidth()/4, this.getY()),new Bullet(this.getX()+this.getWidth()/4*3, this.getY())};
+		}
+		return new Bullet[]{new Bullet(this)};
+	}
+	
+	
 	@Override
 	void paintObj(Graphics g) {
 		// TODO Auto-generated method stub
@@ -71,6 +111,33 @@ public class Hero extends FlyingObject{
 		//画喷射器
 		g.fillRect(this.x+this.width/10, this.y+this.height/10*3, 5, 20);
 		g.fillRect(this.x+this.width/10*9-5, this.y+this.height/10*3, 5, 20);
+	}
+
+	@Override
+	void step() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	boolean outOfBound() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	boolean hit(FlyingObject flyingObject) {
+		
+		boolean b=this.x>=this.x-flyingObject.getWidth()
+					&& this.x<=this.x+this.width+flyingObject.getWidth()
+					&&
+					this.y>=this.y-flyingObject.getHeight()
+					&&
+					this.y<=this.y+this.height+flyingObject.getHeight();
+		if (b) {
+			return true;
+		}
+		return false;
 	}
 	
 	
